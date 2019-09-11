@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票首页</title>
+</head>
+<body>
+<h1>投票应用</h1>
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+            <li>
+                <a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a>
+            </li>
+        {% endfor%}
+    </ul>
+{% else %}
+    <p>没有检索到</p>
+{% endif %}
+
+</body>
+</html>

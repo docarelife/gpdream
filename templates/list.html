@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    全科梦 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{% block thispagecss %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block thispagejs %}
+{% endblock %}
+
+{% block content %}
+    <!--页面标题-->
+    <h2 class="litle"><span>慢病是全人类共同面对的问题，全科医学对其规范化管理是一个好办法</span>全科之梦</h2>
+    <div class="navtab">
+        <!--搜索模块-->
+        <div class="search">
+            <form action="{% url 'article:article_list' %}" method="post" name="searchform" id="searchform">
+                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字"
+                       style="color: rgb(153, 153, 153);"
+                       onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+                       onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+                <input name="show" value="title" type="hidden">
+                <input name="tempid" value="1" type="hidden">
+                <input name="tbname" value="news" type="hidden">
+                <input name="Submit" class="input_submit" value="搜索" type="submit">
+            </form>
+        </div>
+        <!--标签模块-->
+        <ul class="navlist" id="pageContent">
+            <li><a href="{% url 'article:article_list' %}">全科医学</a></li>
+            <li><a href="{% url 'article:article_list' %}">慢病管理</a></li>
+            <li><a href="{% url 'article:article_list' %}">公共卫生</a></li>
+            <li><a href="{% url 'article:article_list' %}">妇幼保健</a></li>
+        </ul>
+        <!--标签特效模块-->
+        <script language="javascript">
+            var obj = null;
+            var As = document.getElementById('pageContent').getElementsByTagName('li');
+            obj = As[0];
+            for (i = 1; i < As.length; i++) {
+                if (window.location.href.indexOf(As[i].href) >= 0)
+                    obj = As[i];
+            }
+            obj.id = 'pagecurrent'
+        </script>
+    </div>
+    <!--文章模块-->
+    <div class="newblogs">
+        <h2 class="hometitle">最新文章</h2>
+        <!--文章列表-->
+        <ul>
+            <li>
+                <h3 class="blogtitle">
+                    <span>
+                        <a href="{% url 'article:article_list' %}" title="css3" target="_blank" class="classname">慢病管理</a>
+                    </span>
+                    <a href="{% url 'article:article_list' %}" target="_blank">高血压</a>
+                </h3>
+                <div class="bloginfo">
+                    <span class="blogpic">
+                        <a href="{% url 'article:article_list' %}" title="高血压的规范化管理">
+                            <img src="{% static 'images/t01.jpg' %}" alt="降压药的分类"/>
+                        </a>
+                    </span>
+                    <p>高血压的规范化管理</p>
+                </div>
+                <div class="autor">
+                    <span class="lm f_l"></span>
+                    <span class="dtime f_l">2018-03-26</span>
+                    <span class="viewnum f_l">浏览（<a href="{% url 'article:article_list' %}">1429</a>）</span>
+                    <span class="f_r">
+                        <a href="{% url 'article:article_list' %}" class="more">阅读原文>></a>
+                    </span>
+                </div>
+                <div class="line"></div>
+            </li>
+            <li>
+                <h3 class="blogtitle">
+                    <span>
+                        <a href="{% url 'article:article_list' %}" title="css3" target="_blank" class="classname">慢病管理</a>
+                    </span>
+                    <a href="{% url 'article:article_list' %}" target="_blank">高血压</a>
+                </h3>
+                <div class="bloginfo">
+                    <span class="blogpic">
+                        <a href="{% url 'article:article_list' %}" title="高血压的规范化管理">
+                            <img src="{% static 'images/t01.jpg' %}" alt="降压药的分类"/>
+                        </a>
+                    </span>
+                    <p>高血压的规范化管理</p>
+                </div>
+                <div class="autor">
+                    <span class="lm f_l"></span>
+                    <span class="dtime f_l">2018-03-26</span>
+                    <span class="viewnum f_l">浏览（<a href="{% url 'article:article_list' %}">1429</a>）</span>
+                    <span class="f_r">
+                        <a href="{% url 'article:article_list' %}" class="more">阅读原文>></a>
+                    </span>
+                </div>
+                <div class="line"></div>
+            </li>
+        </ul>
+        <!--页码列表-->
+        <div class="pagelist">
+            <a title="Total record">
+                <b>43</b>
+            </a>&nbsp;&nbsp;&nbsp;
+            <b>1</b>&nbsp;
+            <a href="{% url 'article:article_list' %}">2</a>&nbsp;
+            <a href="{% url 'article:article_list' %}">下一页</a>&nbsp;
+            <a href="{% url 'article:article_list' %}">尾页</a>
+        </div>
+    </div>
+    <!--左侧栏-->
+    <div class="rbox">
+        <!--热度排行-->
+        <div class="paihang">
+            <h2 class="hometitle">热度排行</h2>
+            <ul>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">高血压管理</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>高血压规范化管理
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <!--推荐文章-->
+        <div class="paihang">
+            <h2 class="hometitle">文章推荐</h2>
+            <ul>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">糖尿病</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>糖尿病的规范化管理
+                    </p>
+                </li>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">糖尿病</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>糖尿病的规范化管理
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <!--微信二维码-->
+        <div class="weixin">
+            <h2 class="hometitle">官方微信</h2>
+            <ul>
+                <img src="{% static 'images/wx.jpg' %}">
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+

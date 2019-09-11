@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    登录 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{% block thispagecss %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block thispagejs %}
+{% endblock %}
+
+{% block content %}
+    {# 利用get方法传递上页参数，表单提交地址不指定，既是提交到地址栏地址(指向自己)并附带参数，否则得不到参数 #}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ login_form }}
+        <input type="submit" value="登录">
+    </form>
+{% endblock %}

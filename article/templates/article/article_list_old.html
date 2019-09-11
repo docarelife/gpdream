@@ -1,0 +1,82 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    全部文章列表- 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+    <link href="{% static 'article/css/article.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <!--文章显示区-->
+    <div class="infos">
+        <div class="newsview">
+            <!--页面标题导航-->
+            <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a
+                    href="/">全科之梦(共{{ page_of_articles.paginator.count }}篇)--(当前第{{page_of_articles.number}}页，共{{ page_of_articles.paginator.num_pages }}页)</a></h2>
+            <!--文章列表-->
+            <ul>
+                {% for article in page_of_articles.object_list %}
+                    <li>
+                        <a href="{% url 'article:article_detail' article.id %}" target="_blank">
+                            {{ article.id }}--<b>标题：</b>{{ article.title }}
+                        </a>
+                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        作者：<a href="">{{ article.author }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        发表日期：{{ article.pub_date|date:'Y-m-d' }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        更新日期：{{ article.update_time|date:'Y-m-d' }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        分类：<a
+                            href="{% url 'article:article_list_bycategory' article.category.id %}">{{ article.category }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        浏览（{{ article.get_read_time }}）
+                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>内容：</b>{{ article.content|striptags|truncatechars:50 }}
+
+                        <hr>
+                    </li>
+                {% empty %}
+                    <p>-- 暂无文章，敬请期待 --</p>
+                {% endfor %}
+            </ul>
+
+            <!--页码模块-->
+            <div class="paginator">
+                {% if page_of_articles.has_previous %}
+                    <span><a href="?page={{ page_of_articles.previous_page_number }}">上一页：</a></span>
+                {% else %}
+                    <span>上一页：</span>
+                {% endif %}
+
+                {% for page_num in page_range %}
+                    {% if page_num == page_of_articles.number %}
+                        <span class=""><b>{{ page_num }}</b></span>
+                    {% elif page_num == '...' %}
+                        <span>{{ page_num }}</span>
+                    {% else %}
+                        <span><a href="?page={{ page_num }}">{{ page_num }}&nbsp;&nbsp;</a></span>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_of_articles.has_next %}
+                    <span><a href="?page={{ page_of_articles.next_page_number }}">下一页：</a></span>
+                {% else %}
+                    <span>下一页：</span>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="cn">
+<head>
+    <meta charset="utf8">
+    <meta name="keywords" content="全科梦,博客,gpdream"/>
+    <meta name="description" content="全科梦，一个全科内容管理分享网站，提供全科医学/慢病管理/心情随笔等相关内容。"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            全科梦 - 一个全科内容管理分享网站
+        {% endblock %}
+    </title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    {% block thispagecss %}
+    {% endblock %}
+    <link href="{% static 'css/m.css' %}" rel="stylesheet">
+    {% block thispagejs %}
+    {% endblock %}
+    <!--[if lt IE 9]>
+        <script src="{% static 'js/modernizr.js' %}"></script>
+    <![endif]-->
+    <script>
+        window.onload = function () {
+            var oH2 = document.getElementsByTagName("h2")[0];
+            var oUl = document.getElementsByTagName("ul")[0];
+            oH2.onclick = function () {
+                var style = oUl.style;
+                style.display = style.display == "block" ? "none" : "block";
+                oH2.className = style.display == "block" ? "open" : ""
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    {# 顶部导航栏 #}
+    <div id="mnav">
+        <h2><span class="navicon"></span></h2>
+        <ul>
+            <li><a href="{% url 'index' %}">首页</a></li>
+            <li><a href="{% url 'list' %}">全科之梦</a></li>
+            <li><a href="{% url 'link' %}">学无止境</a></li>
+            <li><a href="{% url 'share' %}">心情随笔</a></li>
+            <li><a href="{% url 'about' %}">关于我们</a></li>
+            <li><a href="{% url 'gbook' %}">留言</a></li>
+        </ul>
+    </div>
+    <div class="topnav">
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">首页</a></li>
+                <li><a href="{% url 'list' %}">全科之梦</a></li>
+                <li><a href="{% url 'link' %}">学无止境</a></li>
+                <li><a href="{% url 'share' %}">心情随笔</a></li>
+                <li><a href="{% url 'about' %}">关于我们</a></li>
+                <li><a href="{% url 'gbook' %}">留言</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<article>
+    {% block content %}
+    {% endblock %}
+</article>
+<footer>
+    <p>
+        Copyright © <a href="{% url 'index' %}">www.gpdream.com</a> All Rights Reserved.
+        <a href="/">ICP备00000000号-1</a>
+    </p>
+</footer>
+</body>
+{% block bottomjs %}
+{% endblock %}
+</html>

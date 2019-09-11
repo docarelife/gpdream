@@ -1,0 +1,224 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    心情随笔 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/share.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+    <script src="{% static 'js/scrollReveal.js' %}"></script>
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <h2 class="litle"><span>好咖啡要和朋友一起品尝，好心情也要和旅友一起分享。</span>心情随笔</h2>
+    <!--页面标题栏-->
+    <div class="navtab">
+        <div class="search">
+            <form action="{% url 'article:article_list' %}" method="post" name="searchform" id="searchform">
+                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字"
+                       style="color: rgb(153, 153, 153);"
+                       onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+                       onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+                <input name="show" value="title" type="hidden">
+                <input name="tempid" value="1" type="hidden">
+                <input name="tbname" value="news" type="hidden">
+                <input name="Submit" class="input_submit" value="搜索" type="submit">
+            </form>
+        </div>
+        <ul class="navlist" id="pageContent">
+            <li><a href="{% url 'article:article_list' %}">日记</a></li>
+            <li><a href="{% url 'article:article_list' %}">旅途</a></li>
+            <li><a href="{% url 'article:article_list' %}">禅悟</a></li>
+        </ul>
+        <script language="javascript">
+            var obj = null;
+            var As = document.getElementById('pageContent').getElementsByTagName('li');
+            obj = As[0];
+            for (i = 1; i < As.length; i++) {
+                if (window.location.href.indexOf(As[i].href) >= 0)
+                    obj = As[i];
+            }
+            obj.id = 'pagecurrent'
+        </script>
+    </div>
+    <!--文章展示区-->
+    <div class="mbbox">
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb01.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">基层感悟</a>
+            </div>
+            <p class="mbinfo">基岩是冲积层之下较坚硬的岩石，一般是灰岩、花岗岩、砂岩和页岩等。其表面是致密的黏土层,通常称为假底。当基岩为灰岩时，矿床底板常呈现四凸不平，也称喀斯特底板，使矿床开采困难...</p>
+        </div>
+        <div class="mbpic effect" data-scroll-reveal="enter from the bottom">
+            <div class="mbimg">
+                <img src="{% static 'images/mb02.jpg' %}">
+            </div>
+            <div class="mbtitle">
+                <a href="{% url 'article:article_list' %}">日记</a>
+            </div>
+            <p class="mbinfo">日记是指用来记录其内容的载体，日记也指每天记事的本子或每天所遇到的和所做的事情的记录...</p>
+        </div>
+     </div>
+    <!--页码-->
+    <div class="pagelist">
+        <a title="Total record">&nbsp;
+            <b>43</b>
+        </a>&nbsp;&nbsp;&nbsp;
+        <b>1</b>&nbsp;
+        <a href="{% url 'article:article_list' %}">2</a>&nbsp;
+        <a href="{% url 'article:article_list' %}">下一页</a>&nbsp;
+        <a href="{% url 'article:article_list' %}">尾页</a>
+    </div>
+{% endblock %}
+
+{# 底部JS #}
+{% block bottomjs %}
+    <script>
+        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+            (function () {
+                window.scrollReveal = new scrollReveal({reset: true});
+            })();
+        }
+        ;
+    </script>
+{% endblock %}

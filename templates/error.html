@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    错误提示 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{% block thispagecss %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block thispagejs %}
+{% endblock %}
+
+{% block content %}
+    <!--页面标题-->
+    <h2 class="litle"><span>慢病是全人类共同面对的问题，全科医学对其规范化管理是一个好办法</span>全科之梦</h2>
+    <div class="navtab">
+        <!--搜索模块-->
+        <div class="search">
+            <form action="{% url 'article:article_list' %}" method="post" name="searchform" id="searchform">
+                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字"
+                       style="color: rgb(153, 153, 153);"
+                       onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+                       onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+                <input name="show" value="title" type="hidden">
+                <input name="tempid" value="1" type="hidden">
+                <input name="tbname" value="news" type="hidden">
+                <input name="Submit" class="input_submit" value="搜索" type="submit">
+            </form>
+        </div>
+        <!--标签模块-->
+        <ul class="navlist" id="pageContent">
+            <li id="pagecurrent"><a href="{% url 'article:article_list' %}">全部分类</a></li>
+            {% for category in categorys %}
+                <li>
+                    <a href="{% url 'article:article_list_bycategory' category.id %}">{{ category.name }}（{{ category.article_count }}）</a>
+                </li>
+            {% endfor %}
+            {#            <li><a href="{% url 'article:article_list' %}">全科医学</a></li>#}
+            {#            <li><a href="{% url 'article:article_list' %}">慢病管理</a></li>#}
+            {#            <li><a href="{% url 'article:article_list' %}">公共卫生</a></li>#}
+            {#            <li><a href="{% url 'article:article_list' %}">妇幼保健</a></li>#}
+        </ul>
+        <!--标签特效模块-->
+        {#        <script language="javascript">#}
+        {#            var obj = null;#}
+        {#            var As = document.getElementById('pageContent').getElementsByTagName('li');#}
+        {#            obj = As[0];#}
+        {#            for (i = 1; i < As.length; i++) {#}
+        {#                if (window.location.href.indexOf(As[i].href) >= 0)#}
+        {#                    obj = As[i];#}
+        {#            }#}
+        {#            obj.id = 'pagecurrent'#}
+        {#        </script>#}
+    </div>
+    <!--文章模块-->
+    <div class="newblogs">
+        <h2 class="hometitle">提示</h2>
+        <p>{{ message }}</p>
+        <p><a href="{{ redirect_to }}">返回</a></p>
+    </div>
+    <!--左侧栏-->
+    <div class="rbox">
+        <!--日期归档-->
+        <div class="paihang">
+            <h2 class="hometitle">日期归档</h2>
+            <ul>
+                {% for pub_date,article_count in pub_dates.items %}
+                    <li style="margin: 0 0 0 0;padding: 0 0 0 0;">
+                        <b>
+                            <a href="{% url 'article:article_list_bydate' pub_date.year pub_date.month %}" target="_blank">{{pub_date|date:'Y年m月'}}({{ article_count }})</a>
+                        </b>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+        <!--推荐文章-->
+        <div class="paihang">
+            <h2 class="hometitle">文章推荐</h2>
+            <ul>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">糖尿病</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>糖尿病的规范化管理
+                    </p>
+                </li>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">糖尿病</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>糖尿病的规范化管理
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <!--微信二维码-->
+        <div class="weixin">
+            <h2 class="hometitle">官方微信</h2>
+            <ul>
+                <img src="{% static 'images/wx.jpg' %}">
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,28 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    文章编辑器 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+    </form>
+{% endblock %}

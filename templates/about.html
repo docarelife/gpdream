@@ -1,0 +1,87 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    关于我们 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/about.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <!--页面标题-->
+    <h2 class="litle"><span>像“草根”一样，紧贴着地面，低调的存在，冬去春来，枯荣无恙。</span>关于我</h2>
+    <!--内容部分-->
+    <div class="ab_box">
+        <!--左侧栏-->
+        <div class="leftbox">
+            <div class="newsview">
+                <div class="news_infos">
+                    <p>
+                        DoCare，一个朴实无华的基层实务工作者。
+                        <br/><br/>
+                        奋斗了将近十余年时间，期间有很多的不容易，但是都没有放弃过。入了这一行，就深深的喜欢上它。我喜欢一句话&ldquo;冥冥中该来则来，无处可逃&rdquo;。
+                        <br/><br/>
+                        网站的排名。
+                        <br/><br/>
+                        现在很多人向我请教，我想说的是，一是要简单，布局要合理。二是&ldquo;内容&rdquo;，一定要有原创，伪原创也是可以的。三是&ldquo;持续&rdquo;，这是一个持续性过程，一定要有耐心。
+                        <br/><br/>
+                        自从入了这一行，也交到了不少朋友，QQ群也不断的壮大起来，703372502(交流群 <span style="color:#FF0000;">已满员</span>)703372502（技术群），群里的小伙伴们也很积极的帮助新朋友解决问题，如果你想加入我们，这个大家庭的门，永远给你敞开！另外微信群已于2018.4.13日开通（已满100，只接受群主邀请，可加我个人微信进群。我的个人微信号
+                        lizhijun0）
+                    </p>
+                </div>
+            </div>
+            <div class="meandblog">
+                <h2>代表作</h2>
+                <ul>
+                    <li>
+                        <a href=/" target="_blank">全科医学之路</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'article:article_list' %}" target="_blank">慢病的健康管理</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'article:article_list' %}" target="_blank">心路历程</a></li>
+                    <li>
+                        <a href="{% url 'article:article_list' %}" target="_blank">川藏自驾之旅</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'article:article_list' %}" target="_blank">禅悟</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--右侧栏-->
+        <div class="rightbox">
+            <div class="aboutme">
+                <h2 class="hometitle">关于我</h2>
+                <div class="avatar">
+                    <img src="{% static 'images/b04.jpg' %}">
+                </div>
+                <div class="ab_con">
+                    <p>网名：DoCare | ×××</p>
+                    <p>职业：基层实务工作者 </p>
+                    <p>个人微信：lizhijun0</p>
+                    <p>邮箱：703372502@qq.com</p>
+                </div>
+            </div>
+            <div class="weixin">
+                <h2 class="hometitle">官方微信</h2>
+                <ul>
+                    <img src="{% static 'images/wx.jpg' %}">
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

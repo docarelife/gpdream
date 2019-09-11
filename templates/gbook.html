@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+    留言 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{% block thispagecss %}
+    <link href="{% static 'css/gbook.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block thispagejs %}
+{% endblock %}
+
+{% block content %}
+    <h2 class="litle">
+        <span>你，我生命中一个重要的过客，我们之所以是过客，因为你未曾会为我停留。</span>
+        留言
+    </h2>
+    <div class="gbko"></div>
+    <img src="https://wmst.oss-cn-shenzhen.aliyuncs.com/images/girlshoots.GIF">
+{% endblock %}

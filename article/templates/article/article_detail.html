@@ -1,0 +1,137 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    {{ article.title }} - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+    <!--
+        <link href="{% static 'article/bootstrap3.3.7/css/bootstrap.min.css' %}" rel="stylesheet">
+    -->
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <!--文章显示区-->
+    <div class="infos">
+        <div class="newsview">
+            <!--页面标题导航-->
+            <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">{{ article.category }}</a></h2>
+            <!--文章标题-->
+            <h3 class="news_title">{{ article.title }}</h3>
+            <!--文章状态-->
+            <div class="news_author">
+                <span class="au01">{{ article.author }}</span>
+                <span class="au02">{{ article.pub_date|date:'Y-m-d H:i:s' }}</span>
+                <span class="au03">共<b>{{ article.get_read_time }}</b>人围观</span>
+            </div>
+            <!--文章标签-->
+            <div class="tags">
+                <a href="/">{{ article.tags }}</a>
+                <a href="/" target="_blank">心情</a>
+                <a href="/" target="_blank">放松</a>
+                <a href="/" target="_blank">旅游</a>
+                <a href="/" target="_blank">家庭</a>
+            </div>
+            <!--文章简介-->
+            <div class="news_about">
+                <strong>简介</strong>{{ article.info }}
+            </div>
+            <!--文章正文-->
+            <div class="news_infos">
+                {{ article.content|safe }}
+            </div>
+        </div>
+    </div>
+    <!--文章上下篇链接区-->
+    <div class="nextinfo">
+        <p>上一篇：
+            {% if previous_article %}
+                <a href="{% url 'article:article_detail' previous_article.id %}">{{ previous_article.title }}</a>
+            {% else %}
+                没有了
+            {% endif %}
+        </p>
+        <p>下一篇：
+            {% if next_article %}
+                <a href="{% url 'article:article_detail' next_article.id %}">{{ next_article.title }}</a>
+            {% else %}
+                没有了
+            {% endif %}
+        </p>
+    </div>
+    <!--相关文章链接区-->
+    <div class="otherlink">
+        <h2>相关文章</h2>
+        <ul>
+            <li><a href="/" title="云南之行――丽江古镇玉龙雪山">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" title="云南之行――大理洱海一日游">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+        </ul>
+    </div>
+    <!--登录/评论区-->
+    <div class="news_pl">
+        {% if user.is_authenticated %}
+            <h2>欢迎您,{{ user.username }},请输入您的评论</h2>
+            <div style="text-align: center">
+                <form action="{% url 'article:comment:update_comment' %}" method="post">
+                    {% csrf_token %}
+                    <label for="comment_text">评论内容</label>
+                    <textarea id="comment_text" name="text" rows="6" cols="120" style="margin-top: 0.5em"></textarea>
+                    <input type="hidden" name="object_id" value="{{ article.id }}">
+                    <input type="hidden" name="content_type" value="article_base">
+                    <input type="submit" value="提交评论">
+                </form>
+            </div>
+
+        {% else %}
+            <h2>您尚未登录，请
+                <a href="{% url 'article:login' %}?from={{ request.get_full_path }}">登录</a>
+                或
+                <a href="{% url 'article:register' %}?from={{ request.get_full_path }}">注册</a>
+            </h2>
+            {% comment %}
+            {# 自定义form表单 #}
+            <form action="{% url 'article:login' %}" method="post" style="float: right;margin-right: 2em">
+                {% csrf_token %}
+                <label for="id_username">用户名</label>
+                <input type="text" id="id_username" name="username">
+                <label for="id_password">密码</label>
+                <input type="password" id="id_password" name="password">
+                <input type="submit" value="登录">
+            </form>-->
+            {% endcomment %}
+        {% endif %}
+
+
+    </div>
+    <!--评论列表区-->
+    <div class="news_pl">
+        <h2>评论列表</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    {{ comment.user.username }}
+                    ({{ comment.comment_time|date:'Y-m-d H:i:s' }}）<br>
+                    {{ comment.text }}
+                </li>
+            {% empty %}
+                <li>暂无评论</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

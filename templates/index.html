@@ -1,0 +1,211 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+       首页 - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easyfader.min.js' %}"></script>
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <!--轮播图-->
+    <div class="banner">
+        <div id="sucaihuo" class="fader">
+            <img class="slide" src="{% static 'images/banner01.jpg' %}">
+            <img class="slide" src="{% static 'images/banner02.jpg' %}">
+            <img class="slide" src="{% static 'images/banner03.jpg' %}">
+            <div class="fader_controls">
+                <div class="page prev" data-target="prev">&lsaquo;</div>
+                <div class="page next" data-target="next">&rsaquo;</div>
+                <ul class="pager_list">
+                </ul>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $('#sucaihuo').easyFader();
+            });
+        </script>
+    </div>
+    <!--首页精品展示-->
+    <div class="blog">
+        <figure>
+            <ul>
+                <a href="{% url 'article:article_list' %}">
+                    <img src="{% static 'images/mb01.jpg' %}">
+                    <span>点击查看文章</span>
+                </a>
+            </ul>
+            <p><a href="{% url 'article:article_list' %}">美丽的茧</a></p>
+            <figcaption>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。</figcaption>
+        </figure>
+        <figure>
+            <ul>
+                <a href="{% url 'article:article_list' %}">
+                    <img src="{% static 'images/mb02.jpg' %}">
+                    <span>点击查看文章</span>
+                </a>
+            </ul>
+            <p><a href="{% url 'article:article_list' %}">美丽的茧</a></p>
+            <figcaption>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。</figcaption>
+        </figure>
+        <figure>
+            <ul>
+                <a href="{% url 'article:article_list' %}">
+                    <img src="{% static 'images/mb03.jpg' %}">
+                    <span>点击查看文章</span>
+                </a>
+            </ul>
+            <p><a href="{% url 'article:article_list' %}">美丽的茧</a></p>
+            <figcaption>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。</figcaption>
+        </figure>
+        <figure>
+            <ul>
+                <a href="{% url 'article:article_list' %}">
+                    <img src="{% static 'images/mb04.jpg' %}">
+                    <span>点击查看文章</span>
+                </a>
+            </ul>
+            <p><a href="{% url 'article:article_list' %}">美丽的茧</a></p>
+            <figcaption>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。</figcaption>
+        </figure>
+    </div>
+    <!--最新文章展示-content-left-->
+    <div class="newblogs">
+        <h2 class="hometitle">最新文章</h2>
+        <ul>
+            <li>
+                <h3 class="blogtitle">
+                    <span>
+                        <a href="{% url 'article:article_list' %}" title="css3" target="_blank" class="classname">个人博客</a>
+                    </span>
+                    <a href="{% url 'article:article_list' %}" target="_blank">美丽的茧</a>
+                </h3>
+                <div class="bloginfo">
+                    <span class="blogpic">
+                        <a href="{% url 'article:article_list' %}" title="">
+                            <img src="{% static 'images/t01.jpg' %}" alt="美丽的茧"/>
+                        </a>
+                    </span>
+                    <p>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。</p>
+                </div>
+                <div class="autor">
+                    <span class="lm f_l"></span>
+                    <span class="dtime f_l">2018-03-26</span>
+                    <span class="viewnum f_l">浏览（<a href="{% url 'article:article_list' %}">1429</a>）</span>
+                    <span class="f_r">
+                        <a href="{% url 'article:article_list' %}" class="more">阅读原文>></a>
+                    </span>
+                </div>
+                <div class="line">
+                </div>
+            </li>
+            <li>
+                <h3 class="blogtitle">
+                    <span>
+                        <a href="{% url 'article:article_list' %}" title="css3" target="_blank" class="classname">精品文章</a>
+                    </span>
+                    <a href="{% url 'article:article_list' %}" target="_blank">美丽的茧</a>
+                </h3>
+                <div class="bloginfo">
+                    <span class="blogpic">
+                        <a href="{% url 'article:article_list' %}" title="">
+                            <img src="{% static 'images/b01.png' %}"/>
+                        </a></span>
+                    <p>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。</p>
+                </div>
+                <div class="autor">
+                    <span class="lm f_l"></span>
+                    <span class="dtime f_l">2018-03-26</span>
+                    <span class="viewnum f_l">浏览（<a href="{% url 'article:article_list' %}">1429</a>）</span>
+                    <span class="f_r">
+                        <a href="{% url 'article:article_list' %}" class="more">阅读原文>></a>
+                    </span></div>
+                <div class="line">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--排行榜-content-right-->
+    <div class="rbox">
+        <!--右侧排行一-->
+        <div class="paihang">
+            <h2 class="hometitle">文章排行</h2>
+            <ul>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">美丽的茧</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。
+                    </p>
+                </li>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">美丽的茧</a></b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/b03.jpg' %}"/></i>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <!--右侧排行二-->
+        <div class="paihang">
+            <h2 class="hometitle">站长推荐</h2>
+            <ul>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">美丽的茧</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/t02.jpg' %}"/>
+                        </i>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。
+                    </p>
+                </li>
+                <li>
+                    <b>
+                        <a href="{% url 'article:article_list' %}" target="_blank">美丽的茧</a>
+                    </b>
+                    <p>
+                        <i>
+                            <img src="{% static 'images/b03.jpg' %}"/>
+                        </i>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <!--友情链接-->
+        <div class="links">
+            <h2 class="hometitle">友情链接</h2>
+            <ul>
+                <li><a href="https://www.baidu.com/">百度一下，你就知道</a></li>
+                <li><a href="http://med.wanfangdata.com.cn/">万方医学网</a></li>
+            </ul>
+        </div>
+        <!--微信二维码展示-->
+        <div class="weixin">
+            <h2 class="hometitle">官方微信</h2>
+            <ul>
+                <img src="{% static 'images/wx.jpg' %}">
+            </ul>
+        </div>
+    </div>
+{% endblock %}

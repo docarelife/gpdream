@@ -1,0 +1,52 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    {{ category.name }}分类-文章列表- 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <!--文章显示区-->
+    <div class="infos">
+        <div class="newsview">
+            <!--页面标题导航-->
+            <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;{{ category.name }}(共{{ articles|length }}篇)</h2>
+            <!--文章标题-->
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <a href="{% url 'article:article_detail' article.id %}" target="_blank">
+                            {{ article.id }}--<b>标题：</b>{{ article.title }}
+                        </a>
+                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        作者：<a href="">{{ article.author }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        发表日期：{{ article.pub_date|date:'Y-m-d' }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        更新日期：{{ article.update_time|date:'Y-m-d' }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        分类：<a href="{% url 'article:article_list_bycategory' article.category.id %}">{{ article.category }}</a>
+                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>内容：</b>{{ article.content|striptags|truncatechars:50 }}
+
+                        <hr>
+                    </li>
+                {% empty %}
+                    <p>-- 暂无文章，敬请期待 --</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

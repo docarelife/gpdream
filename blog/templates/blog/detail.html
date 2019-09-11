@@ -1,0 +1,80 @@
+{# 继承模板 #}
+{% extends 'base.html' %}
+
+{# 加载静态文件 #}
+{% load staticfiles %}
+
+{# 标题块 #}
+{% block title %}
+    {{article.title}} - 全科梦 - 一个全科内容管理分享网站
+{% endblock %}
+
+{# 这个页面的CSS块 #}
+{% block thispagecss %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 这个页面的JS块 #}
+{% block thispagejs %}
+{% endblock %}
+
+{# ***内容块*** #}
+{% block content %}
+    <!--文章显示区-->
+    <div class="infos">
+        <div class="newsview">
+            <!--页面标题导航-->
+            <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">全科之梦</a></h2>
+            <!--文章标题-->
+            <h3 class="news_title">{{ article.title }}</h3>
+            <!--文章状态-->
+            <div class="news_author">
+                <span class="au01">{{ article.author }}</span>
+                <span class="au02">2018-03-18</span>
+                <span class="au03">共<b>309</b>人围观</span>
+            </div>
+            <!--文章标签-->
+            <div class="tags">
+                <a href="/">工作</a>
+                <a href="/" target="_blank">心情</a>
+                <a href="/" target="_blank">放松</a>
+                <a href="/" target="_blank">旅游</a>
+                <a href="/" target="_blank">家庭</a>
+            </div>
+            <!--文章简介-->
+            <div class="news_about">
+                <strong>简介</strong>曾经有站长找我求助，他说他不知道该怎么办，自己做出来的网站，不仅没有得到大家的认可，反而让大家给他开了一个评判大会。他自己认为已经是做的最好的，却遭受大家无情的指责是“垃圾”作品。
+            </div>
+            <!--文章正文-->
+            <div class="news_infos">
+                {{ article.content|safe }}
+            </div>
+        </div>
+    </div>
+    <!--文章上下篇链接区-->
+    <div class="nextinfo">
+        <p>上一篇：<a href="/">再别康桥</a></p>
+        <p>下一篇：<a href="/">云南之行――大理洱海一日游</a></p>
+    </div>
+    <!--相关文章链接区-->
+    <div class="otherlink">
+        <h2>相关文章</h2>
+        <ul>
+            <li><a href="/" title="云南之行――丽江古镇玉龙雪山">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" title="云南之行――大理洱海一日游">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+            <li><a href="/" target="_blank">云南之行――大理洱海一日游</a></li>
+        </ul>
+    </div>
+    <!--文章评论区-->
+    <div class="news_pl">
+        <h2>文章评论</h2>
+        <ul>
+            <li>好文章</li>
+            <li>不错</li>
+            <li>点赞</li>
+        </ul>
+    </div>
+{% endblock %}
